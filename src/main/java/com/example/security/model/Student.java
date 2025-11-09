@@ -26,7 +26,7 @@ public class Student {
     @Size(min = 0,max = 5,message = "last name should not be  empty")
     private String lastName;
 
-    @JsonIgnore
+   // @JsonIgnore
     @PasswordValidation
     private String password;
 

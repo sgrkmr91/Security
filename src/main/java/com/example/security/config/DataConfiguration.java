@@ -3,6 +3,7 @@ package com.example.security.config;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.jpa.boot.spi.EntityManagerFactoryBuilder;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,13 +29,19 @@ basePackages = {
 })
 public class DataConfiguration {
 
+    @Value("${data.username}")
+    private String userName;
+
+    @Value("${data.password}")
+    private String userPassword;
+
     @Bean(name="datasource")
     public DataSource dataSource(){
         return DataSourceBuilder.create()
                 .driverClassName("com.mysql.cj.jdbc.Driver")
                 .url("jdbc:mysql://localhost:3306/mydatabase")
-                .username("root")
-                .password("Sagar@1998")
+                .username(userName)
+                .password(userPassword)
                 .build();
     }
 
