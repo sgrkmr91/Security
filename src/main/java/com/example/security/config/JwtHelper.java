@@ -46,7 +46,7 @@ public class JwtHelper {
     }
 
     private String doGenerateToke(Map<String, Object> claims, String username) {
-        return builder().setClaims(claims)
+        return Jwts.builder().setClaims(claims)
                 .setSubject(username).setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis()+JWT_TOKEN_VALIDATOR*1000))
                 .signWith(SignatureAlgorithm.HS256,secret)
@@ -60,16 +60,10 @@ public class JwtHelper {
 
     public Claims getAllClaimsFromToken(String token) {
 
-//        Jwts.parser()
-//                .verifyWith(getSigningKey())
-//                .build()
-//                .parseSignedClaims(token)
-//                .getPayload();
-
         return Jwts
-                .parserBuilder()
-                .setSigningKey(getSigningKey())
-                .build()
+                .parser()
+                .setSigningKey(secret)
+//                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
