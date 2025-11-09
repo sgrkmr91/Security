@@ -1,6 +1,8 @@
 package com.example.security.model;
 
 
+import com.example.security.validator.PasswordValidation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -24,10 +26,15 @@ public class Student {
     @Size(min = 0,max = 5,message = "last name should not be  empty")
     private String lastName;
 
+    @JsonIgnore
+    @PasswordValidation
+    private String password;
+
     public static com.example.security.entity.Student modelToEntity(Student student){
         com.example.security.entity.Student studentEntity = new com.example.security.entity.Student();
         studentEntity.setName(student.getName());
         studentEntity.setLastName(student.getLastName());
+        studentEntity.setPassword(student.getPassword());
         return studentEntity;
     }
 }
