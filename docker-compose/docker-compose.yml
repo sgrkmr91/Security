@@ -1,21 +1,21 @@
-version: '3.9'
-services:
-
-  app:
-    image: my-springboot-app
-    build: .
-    ports:
-      - "8081:8081"
-    depends_on:
-      - mysql
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/mydatabase
-
-
-  mysql:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: Sagar@1998
-      MYSQL_DATABASE: mydb
-    ports:
-      - "3306:3306"
+#version: '3.9'
+#services:
+#
+#  app:
+#    image: my-springboot-app
+#    build: .
+#    ports:
+#      - "8081:8081"
+#    depends_on:
+#      - mysql
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/mydatabase
+#
+#
+#  mysql:
+#    image: mysql:8
+#    environment:
+#      MYSQL_ROOT_PASSWORD: Sagar@1998
+#      MYSQL_DATABASE: mydb
+#    ports:
+#      - "3306:3306"

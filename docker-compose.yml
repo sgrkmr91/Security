@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: Sagar@1998
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: Sagar@1998
+    depends_on:
+      - mysql
+
+  springboot:
+    build: .
+    container_name: security_springboot_project
+    environment:
+      SERVER:
