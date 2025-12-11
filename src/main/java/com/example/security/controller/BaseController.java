@@ -2,11 +2,15 @@ package com.example.security.controller;
 
 import com.example.security.config.JwtHelper;
 import com.example.security.model.Student;
+import com.example.security.model.User;
 import com.example.security.repository.StudentRepository;
+import com.example.security.repository.UserRepository;
 import io.jsonwebtoken.Jwt;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +25,7 @@ public class BaseController {
     private final StudentRepository stdRepo;
     private final UserDetailsService userDetailsService;
     private final JwtHelper jwtHelper;
+    private final UserRepository userRepository;
 
     @GetMapping("/token")
     public String generateToken(){
@@ -38,5 +43,14 @@ public class BaseController {
         return new ResponseEntity<>
                 (com.example.security.entity.Student.entityToModel
                         (stdRepo.save(Student.modelToEntity(student))),HttpStatus.OK);
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> registerNewUser(@RequestBody User user){
+        String status = null;
+                if(userRepository.save(user.toEntity(user))!=null){
+                    status = "Success";
+                }
+                return new ResponseEntity<>(status,HttpStatus.OK);
     }
 }

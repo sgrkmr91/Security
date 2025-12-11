@@ -30,9 +30,10 @@ public class SecurityJwtConfig {
         httpSecurity.csrf(c -> c.disable())
                 .authorizeHttpRequests(r ->
                         r.requestMatchers("/base/get").authenticated())
-                .authorizeHttpRequests(r ->
-                        r.requestMatchers("/base/post").permitAll())
-                .authorizeHttpRequests(a -> a.requestMatchers("/base/token").permitAll())
+                .authorizeHttpRequests(k->
+                        k.requestMatchers("/base/post").permitAll())
+                .authorizeHttpRequests(a ->
+                        a.requestMatchers("/base/token").permitAll())
                 .exceptionHandling(ex->
                         ex.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session ->
