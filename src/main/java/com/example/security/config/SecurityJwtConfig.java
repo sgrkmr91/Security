@@ -33,7 +33,7 @@ public class SecurityJwtConfig {
                 .authorizeHttpRequests(k->
                         k.requestMatchers("/base/post").permitAll())
                 .authorizeHttpRequests(a ->
-                        a.requestMatchers("/base/token").permitAll())
+                        a.requestMatchers("/base/token","/kafka/publish").permitAll())
                 .exceptionHandling(ex->
                         ex.authenticationEntryPoint(authenticationEntryPoint))
                 .sessionManagement(session ->
